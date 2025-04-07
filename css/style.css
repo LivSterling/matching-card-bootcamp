@@ -29,12 +29,42 @@ body {
 /******************************************
 /* LAYOUT
 /*******************************************/
-header {
+main {
+     height: 100vh;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+}
+.gameBoard {
+     width: 80%;
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: space-between;
+     gap: 20px;
+
+     
+}
+.card {
+     border: 1px solid black;
+     width: 17%;
+     height: 20vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 2rem;
+     background-color: white;
+     
 
 }
 
-footer {
+.faceDown {
 
+     color: transparent;
+}
+
+button {
+     display: none;
 }
 
 /******************************************
