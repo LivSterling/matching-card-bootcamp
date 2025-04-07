@@ -1,64 +1,65 @@
 // 1. Setup
 // - Create an array of 5 card values duplicated once to make 10 total cards
 const board = document.getElementById('gameBoard');
-function generateCards(){
-const cardValues = ['🍓', '🍋', '🍉', '🍇', '🍍'];
-const deck = [...cardValues, ...cardValues].sort(() => Math.random() - 0.5)// - Shuffle the array to randomize card positions
-let flippedCards = [];
-let matches = 0; 
-let lockBoard = false;
-const restartBtn = document.getElementById('restartBtn');
-// - Render 10 cards face down on the page (can use a "hidden" or "faceDown" class)
-deck.forEach(value => {
+function generateCards() {
+  const cardValues = ['🍓', '🍋', '🍉', '🍇', '🍍'];
+  const deck = [...cardValues, ...cardValues].sort(() => Math.random() - 0.5)// - Shuffle the array to randomize card positions
+  let flippedCards = [];
+  let matches = 0;
+  let lockBoard = false;
+  const restartBtn = document.getElementById('restartBtn');
+  // - Render 10 cards face down on the page (can use a "hidden" or "faceDown" class)
+  deck.forEach(value => {
     const card = document.createElement('div');
     card.classList.add('card', 'faceDown');
     card.setAttribute('dataValue', value);
     board.appendChild(card);
     card.innerHTML = '❓';
-    
+
     card.addEventListener('click', () => {
 
       if (lockBoard || !card.classList.contains('faceDown') || flippedCards.includes(card)) {
         return;
       }
-        // Only continue if card is still face down AND less than 2 cards are flipped
-        if (card.classList.contains("faceDown") && flippedCards.length < 2) {
-           card.classList.remove('faceDown');
-            card.innerHTML = value;
-            flippedCards.push(card);
-              lockBoard = true
-        }
-      
-        if (flippedCards.length === 2) {
-          
-          const [card1, card2] = flippedCards;
-          const val1 = card1.getAttribute('dataValue');
-          const val2 = card2.getAttribute('dataValue');
-          
-          
-          if  (val1 === val2) {
+      // Only continue if card is still face down AND less than 2 cards are flipped
+      if (card.classList.contains("faceDown") && flippedCards.length < 2) {
+        card.classList.remove('faceDown');
+        card.innerHTML = value;
+        flippedCards.push(card);
+        lockBoard = true
+      }
+
+      if (flippedCards.length === 2) {
+
+        const [card1, card2] = flippedCards;
+        const val1 = card1.getAttribute('dataValue');
+        const val2 = card2.getAttribute('dataValue');
+
+
+        if (val1 === val2) {
+          flippedCards = [];
+          matches += 1
+          if (matches === 5) {
+            alert('YOU WIN!!')
+            restartBtn.style.display = 'block'
+          }
+        } else {
+          setTimeout(() => {
+            card1.classList.add('faceDown');
+            card2.classList.add('faceDown');
             flippedCards = [];
-            matches += 1
-            if ( matches === 5) {
-              alert('YOU WIN!!')
-              restartBtn.style.display = 'block'
-            }
-          }else{
-            setTimeout(() => {
-              card1.classList.add('faceDown');
-        card2.classList.add('faceDown');
-        flippedCards = [];
-        
-      }, 1000);
-      
-          } 
+
+          }, 1000);
+
+        }
       } lockBoard = false
-      });   
-})}
+    });
+  })
+}
 generateCards()
 
 restartBtn.addEventListener('click', () => {
-  board.innerHTML = ''; 
+  board.innerHTML = '';
   restartBtn.style.display = 'none';
   generateCards();
 });
@@ -92,51 +93,4 @@ restartBtn.addEventListener('click', () => {
 
 // 5. Reset (Optional)
 // - Button to restart game: reshuffle cards, reset state, re-render cards
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// the page will have 10 cards flipped over or "hidden"
-
-// On page load cards will randomize in differenvt spots[array?]
-
-//player will click on a card and that card will turn over (be unhidden)if it is "playable"(maybe like a class or a property?).
-
-//player will then click on another card. If that card matches they will stay flipped over and become "unplayable"(prabably a forEach event listener or a e.currentTarget)
-
-//If they dont match the will flip back over and remain "playable"
-
-//when all cards match the game will be over and no cards will be "playable."
-
-
-
 
