@@ -77,7 +77,7 @@ restartBtn.addEventListener('click', () => {
 // - Add it to selectedCards
 
 // - If selectedCards has two cards:
-//     - Disable clicks briefly (lock board)
+//     - Disable clicks briefly (lock board?)
 //     - Check if values match:
 //         - If match:
 //             - Leave them flipped and mark them as matched
